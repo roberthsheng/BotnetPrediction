@@ -4,3 +4,4 @@ torchaudio
 pandas
 matplotlib
 seaborn
+xgboost

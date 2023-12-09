@@ -1,3 +1,7 @@
+'''
+Written by Haoli
+'''
+
 import pandas as pd
 import numpy as np
 
@@ -64,7 +68,7 @@ def loadDataAndPrepFiles():
 
 def train_cpu_random_forest(x_train, y_train):
     # Initialize the CPU-based Random Forest classifier
-    rf_classifier = RandomForestClassifier(n_estimators=32, max_depth=16, random_state=42, verbose=1, n_jobs=-1)
+    rf_classifier = RandomForestClassifier(n_estimators=16, max_depth=16, random_state=42, verbose=1, n_jobs=-1)
 
     # Train the classifier
     rf_classifier.fit(x_train, y_train)
@@ -72,6 +76,10 @@ def train_cpu_random_forest(x_train, y_train):
     return rf_classifier
 
 if __name__ == '__main__':
+
+    # configs
+    eval = False
+
     result_dict = {}
 
     print('-----Load data and preprocessed files------')
@@ -84,12 +92,13 @@ if __name__ == '__main__':
     with open('rf_model.pkl', 'wb') as file:
         pickle.dump(rf_model, file)
 
-    print('-----Evaluate random forest model------')
-    # load the trained model
-    with open('rf_model.pkl', 'rb') as file:
-        rf_model = pickle.load(file)
+    if eval: 
+        print('-----Evaluate random forest model------')
+        # load the trained model
+        with open('rf_model.pkl', 'rb') as file:
+            rf_model = pickle.load(file)
 
-    rf_clf, rf_auc, rf_f1, rf_far = evaluate_result(rf_model, x_train_csr, y_train, x_test_csr, y_test, 'RF', 'Confusion matrix of Random Forest', f'{FIGURE_PATH}/Fig1.png')
+        rf_clf, rf_auc, rf_f1, rf_far = evaluate_result(rf_model, x_train_csr, y_train, x_test_csr, y_test, 'RF', 'Confusion matrix of Random Forest', f'{FIGURE_PATH}/Fig1.png')
 
-    print("Results: ")
-    print(f"Random Forest: AUC = {rf_auc}, F1 = {rf_f1}, FAR = {rf_far}")
+        print("Results: ")
+        print(f"Random Forest: AUC = {rf_auc}, F1 = {rf_f1}, FAR = {rf_far}")
