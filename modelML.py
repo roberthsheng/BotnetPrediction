@@ -1,5 +1,5 @@
 '''
-Written by Yuening (Lily) Li
+Written by Yuening (Lily) Li and Haoli Yin
 '''
 
 import pandas as pd
@@ -109,6 +109,9 @@ if __name__ == '__main__':
 
     print('-----Load data and preprocessed files------')
     x_train_csr, y_train, x_test_csr, y_test = loadDataAndPrepFiles()
+
+    print("x_train_csr.shape = ", x_train_csr.shape)
+    print("y_train.shape = ", y_train.shape)
 
     if model_name in ["rf", "Random Forests"]:
         if not load_model:
