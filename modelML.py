@@ -71,6 +71,8 @@ def loadDataAndPrepFiles():
     return x_train_csr, y_train, x_test_csr, y_test
 
 
+
+
 def train_cpu_random_forest(x_train, y_train):
     # Initialize the CPU-based Random Forest classifier
     rf_classifier = RandomForestClassifier(n_estimators=32, max_depth=16, random_state=42, verbose=1, n_jobs=-1)
@@ -97,7 +99,7 @@ def train_xgboost(x_train, y_train):
 if __name__ == '__main__':
     # configuration for the experiment (which model to use)
     config_dict = {
-        "model_name": "xgboost",  # either "xgboost" or "rf"/"Random Forests"
+        "model_name": "rf",  # options: xgboost | rf 
         "load_model": False,  # If False, retrain model
     }
     model_name = config_dict["model_name"]
